@@ -13,7 +13,13 @@ router.get('/', (req, res) => {
         attributes: ['id', 'product_name']
       }
     ]
-  }).then(tagData => res.json(tagData))
+  }).then(tagData => {
+    if(!tagData) {
+      res.status(404).json({ message: error });
+      return;
+    }
+    res.json(tagData)
+  })
   .catch(err => {
     console.log(err);
     res.json(500).json(err);
@@ -33,11 +39,17 @@ router.get('/:id', (req, res) => {
         attributes: ['id', 'product_name']
       },
     ]
-  }).then(tagData => (res.json(tagData))
+  }).then(tagData => {
+    if(!tagData) {
+      res.status(404).json({ message: error });
+      return;
+    }
+    res.json(tagData)
+  })
   .catch(err => {
     console.log(err);
-    res.status(500).json(err);
-  }));
+    res.json(500).json(err);
+  });
 });
 
 router.post('/', (req, res) => {
@@ -57,11 +69,17 @@ router.put('/:id', (req, res) => {
     where: {
       id: req.params.id,
     },
-  }).then(tagData => res.json(tagData))
+  }).then(tagData => {
+    if(!tagData) {
+      res.status(404).json({ message: error });
+      return;
+    }
+    res.json(tagData)
+  })
   .catch(err => {
     console.log(err);
-    res.status(500).json(err);
-  })
+    res.json(500).json(err);
+  });
 });
 
 router.delete('/:id', (req, res) => {
@@ -70,10 +88,16 @@ router.delete('/:id', (req, res) => {
     where: {
       id: req.params.id
     }
-  }).then(tagData => res.json(tagData))
+  }).then(tagData => {
+    if(!tagData) {
+      res.status(404).json({ message: error });
+      return;
+    }
+    res.json(tagData)
+  })
   .catch(err => {
     console.log(err);
-    res.status(500).json(err);
+    res.json(500).json(err);
   });
 });
 

@@ -135,7 +135,13 @@ router.delete('/:id', (req, res) => {
     where: {
       id: req.params.id
     }
-  }).then(productData => res.json(productData))
+  }).then(productData => {
+  if (!productData) {
+    res.status(404).json({ message: error });
+    return;
+  }  
+  res.json(productData);
+})
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
