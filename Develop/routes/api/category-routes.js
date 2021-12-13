@@ -64,6 +64,10 @@ router.put('/:id', (req, res) => {
       id: req.params.id
     },
   }).then(categoryData => res.json(categoryData))
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  })
 });
 
 router.delete('/:id', (req, res) => {
